@@ -15,7 +15,7 @@ impl FromStr for ChunkType {
     type Err = &'static str;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if s.len() != 4{
+        if s.len() != 4 {
             return Err("chunktype should have length = 4");
         }
         let mut arr: [u8; 4] = [0, 0, 0, 0];

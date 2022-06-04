@@ -11,26 +11,14 @@ pub fn run() -> Result<()> {
     let cli = Args::parse();
 
     match &cli.command {
-        Commands::Encode(args) => match encode(args) {
-            Ok(_) => Ok(()),
-            Err(err) => Err(err),
-        },
-        Commands::Decode(args) => match decode(args) {
-            Ok(_) => Ok(()),
-            Err(err) => Err(err),
-        },
-        Commands::Remove(args) => match remove(args) {
-            Ok(_) => Ok(()),
-            Err(err) => Err(err),
-        },
-        Commands::Print(args) => match print(args) {
-            Ok(_) => Ok(()),
-            Err(err) => Err(err),
-        },
+        Commands::Encode(args) => encode(args),
+        Commands::Decode(args) => decode(args),
+        Commands::Remove(args) => remove(args),
+        Commands::Print(args) => print(args),
     }
 }
 
-fn encode(encode: &Encode) -> Result<String> {
+fn encode(encode: &Encode) -> Result<()> {
     let vec = fs::read(&encode.path)?;
     let mut png = Png::try_from(&vec[..])?;
 
@@ -45,10 +33,10 @@ fn encode(encode: &Encode) -> Result<String> {
         fs::write(output, "Encoded")?;
     }
 
-    Ok("Encoded".to_string())
+    Ok(())
 }
 
-fn decode(decode: &Decode) -> Result<String> {
+fn decode(decode: &Decode) -> Result<()> {
     let vec = fs::read(&decode.path)?;
     let png = Png::try_from(&vec[..])?;
 
@@ -61,10 +49,10 @@ fn decode(decode: &Decode) -> Result<String> {
         }
     }
 
-    Ok("Decoded".to_string())
+    Ok(())
 }
 
-fn remove(remove: &Remove) -> Result<String> {
+fn remove(remove: &Remove) -> Result<()> {
     let vec = fs::read(&remove.path)?;
     let mut png = Png::try_from(&vec[..])?;
 
@@ -72,7 +60,7 @@ fn remove(remove: &Remove) -> Result<String> {
         Ok(chunk) => {
             println!("{} {}", &remove.chunktype, chunk.data_as_string().unwrap());
             fs::write(&remove.path, png.as_bytes())?;
-            Ok("Removed".to_string())
+            Ok(())
         }
         Err(err) => {
             println!("chunk not deleted");
@@ -81,14 +69,14 @@ fn remove(remove: &Remove) -> Result<String> {
     }
 }
 
-fn print(print: &Print) -> Result<String> {
+fn print(print: &Print) -> Result<()> {
     use std::process::Command;
     match Command::new("feh").arg(&print.path).output() {
-        Ok(_) => Ok("Printed".to_string()),
+        Ok(_) => Ok(()),
         Err(_) => {
             let vec = fs::read(&print.path)?;
             println!("{:?}", vec);
-            Ok("Printed".to_string())
+            Ok(())
         }
     }
 }
