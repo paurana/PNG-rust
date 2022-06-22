@@ -6,15 +6,16 @@ I came across [png-me](https://picklenerd.github.io/pngme_book/) and decided to 
 specified in the challenge, this is my own but exact implementation of the same.
 
 ## Setup
-1. Clone the repository to your computer.
-2. Navigate to the **parent** folder in a terminal by `cd path/to/repo` and then `cd ..`
-3. Run `cargo install --path=rpng` in the parent folder.
+1. Ensure you have `cargo (1.54)` installed locally
+2. Clone the repository to your computer.
+3. Navigate to the **parent** folder in a terminal by `cd path/to/repo` and then `cd ..`
+4. Run `cargo install --path=rpng` in the parent folder.
 
 **That's it, you're good to go!**
 
 ## Usage
 The tool only has implementation for four commands - `encode`, `decode`, `remove` and `print` and they can be used as follows:
-```
+```sh
 rpng encode <PATH> <CHUNKTYPE> <MESSAGE> [OUTPUT]
 rpng decode <PATH> <CHUNKTYPE>
 rpng remove <PATH> <CHUNKTYPE>
@@ -26,8 +27,8 @@ Another important detail to note is `encode` takes an optional `OUTPUT` paramete
 parameter in case of a successful encoding.
 
 To make things more clear, this is how the tool can be used:
-```
-rpng encode ./dice.png ruSt "This is a secret message! output.txt
+```sh
+rpng encode ./dice.png ruSt "This is a secret message!" output.txt
 rpng decode ./dice.png ruSt
 rpng remove ./dice.png ruSt
 rpng print ./dice.png
