@@ -1,12 +1,12 @@
 # rpng
-A simple CLI tool encode and decode secret messages in PNG files. 
+A simple CLI tool to encode and decode secret messages in PNG files. 
 
 ## Project Idea
 I came across [png-me](https://picklenerd.github.io/pngme_book/) and decided to give it a shot. The project has no extra features other than the ones
 specified in the challenge, this is my own but exact implementation of the same.
 
 ## Setup
-1. Ensure you have `cargo (1.54)` installed locally
+1. Ensure you have `cargo (1.54)` installed locally.
 2. Clone the repository to your computer.
 3. Navigate to the **parent** folder in a terminal by `cd path/to/repo` and then `cd ..`
 4. Run `cargo install --path=rpng` in the parent folder.
